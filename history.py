@@ -4,9 +4,6 @@ from typing import List, Dict
 from pprint import pprint
 
 sysprompt = """You are a diligent, productive, very sharp programmer. You love explaining your code and mentoring others. You don't hesitate to say "I don't know." You are well-liked by your peers, and shine in teams, because your code is generally simple, easy to read, and understand."""
-# sysprompt = """You are an expert machine learning (ML) engineer, and a productive, efficient, very sharp programmer."""
-
-
 
 
 class History:
@@ -34,8 +31,6 @@ class History:
             return []
 
 
-
-
 class Conversation:
     """
     Contains all the history and meta to manage single conversations.
@@ -57,8 +52,6 @@ class Conversation:
             self.messages = self.load()
 
 
-
-
     def load(self) -> List[Dict[str, str]]:
         """
         Loads and returns all messages from the JSON file.
@@ -75,8 +68,6 @@ class Conversation:
         except json.JSONDecodeError:
             print(f"Error decoding JSON from {self.json_path}.")
             return []
-
-
 
 
     def save(self, message: str, sysprompt: bool = False) -> None:
@@ -97,8 +88,6 @@ class Conversation:
             raise MyBad('Conversation.save threw some error. Did you specify a wrong argument for sys? True|False')
 
 
-
-
     def save_json(self, messages: List[Dict[str, str]]) -> None:
         """
         Saves messages to .json file (already created at __init__).
@@ -106,8 +95,6 @@ class Conversation:
         with open(self.json_path, 'w') as f:
             json.dump(self.messages, f, indent=4)
         
-
-
 
     def save_md(self, message: str, sysprompt: bool = False) -> None:
         """
@@ -128,8 +115,6 @@ class Conversation:
             md.write(intro + message)
 
 
-
-
     def get_sysprompt(self) -> str:
         """
         Retrieves the System Prompt (first item).
@@ -139,8 +124,6 @@ class Conversation:
         """
         if self.messages != [] and '0' in self.messages[0]:
             return self.messages[0]['0']
-
-
 
 
     def set_sysprompt(self, message: str = sysprompt) -> None:
@@ -154,8 +137,6 @@ class Conversation:
         self.sysprompt: str = message
         self.save_json(self.messages)
         self.save_md(message, True)
-
-
 
 
     def save_md_structure(self, messages) -> None:
@@ -173,8 +154,6 @@ class Conversation:
                         md.write(f"### Message {i}\n\nTimestamp: {key}\n\n{value}")
 
 
-
-
     def stream_out(self, output_path, message: str) -> None:
         """
         Writes streamer output to a Markdown file in real-time.
@@ -182,8 +161,6 @@ class Conversation:
         """
         with open(output_path, 'a') as md:
             md.write(message)
-
-
 
 
     def to_template(self, 
@@ -215,8 +192,6 @@ class Conversation:
                 return self.prompt_template_anthropic()
 
 
-
-
     def prompt_template_mistral(self, 
         model: str = 'mistral'
         ) -> str:
@@ -244,8 +219,6 @@ class Conversation:
         return history
 
 
-
-
     def prompt_template_openai(self, 
         model: str = "gpt-3.5-turbo"
         ) -> List:
@@ -268,8 +241,6 @@ class Conversation:
                         {"role": "assistant", "content": content}
                     )
         return messages_template
-
-
 
 
     def prompt_template_anthropic(self, 
@@ -306,6 +277,3 @@ class Conversation:
                     }
                     )
         return messages_template
-
-
-

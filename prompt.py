@@ -22,7 +22,6 @@ from history import History, Conversation
 
 MMI_Version = "MMI v0.12"
 MMI_Icon = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'icon.png')
-sysprompt = """You are a diligent, productive, very sharp programmer. You love explaining your code and mentoring others. You don't hesitate to say "I don't know." You are well-liked by your peers, and shine in teams, because your code is generally simple, easy to read, and understand."""
 max_tokens = 4096
 
 
@@ -170,12 +169,6 @@ class InputDialog(QDialog):
         conv = Conversation(conv_id)
         # setText to system_prompt_edit
         self.sysprompt_edit.setText(conv.get_sysprompt())
-        return
-
-
-    def set_conv_sysprompt(self, conv_id: str, sysprompt: str = sysprompt) -> None:
-        conv = Conversation(conv_id)
-        conv.set_sysprompt(sysprompt)
         return
 
 

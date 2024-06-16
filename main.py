@@ -16,6 +16,8 @@ from gen.mistral   import chat_stream_mistral
 from gen.openai    import chat_stream_openai
 from gen.anthropic import chat_stream_anthropic
 
+# TODO: see NOTE.md
+
 load_dotenv()  # take environment variables from .env
 
 OPENAI_API_KEY    = os.getenv("OPENAI_API_KEY")
@@ -25,60 +27,6 @@ if OPENAI_API_KEY is None:
 ANTHROPIC_API_KEY = os.getenv('ANTHROPIC_API_KEY')
 if ANTHROPIC_API_KEY is None:
     raise RuntimeError("API key not found. Set the ANTHROPIC_API_KEY environment variable in `.env`.")
-
-
-
-# TODO: 
-#
-# HISTORY:
-# - selecting conv auto-fills correct model
-# - option to "redo conv with another model"
-#   - each step of the way, control then validate move to next
-#   - let one redo any ste (prompt+re-reply) in any conv
-#       - add/remove any pair of steps
-#   - Update JSON correctly for subsequent contexts
-#
-#
-# Easy 1-click "one-off chat" (with optional continuation as a conv, maybe)
-#   - will store in a special folder with timestamps and names and that's it
-#   - to continue, morph into a conv
-#   - will soon take us to implementing single-message edit
-#
-#
-# export .md full conv (or html etc)
-#
-#
-# - redo gen.mistral proper (first one, the worst, needs total re-do from scratch)
-#
-# - store model per message
-#   - rethink JSON object maybe
-#       - alternatively use .md for meta (frontmatter or something)
-#   - keep Conversation.messages intact
-#   - but add other things to JSON, and do the write/read logic to preserve .messages while adding e.g. message.model 
-#
-# SEARCH + REPLACE feature
-#   - per conv
-#       - maybe per msg later    
-#   - takes in string A
-#   - replaces it if/with string B
-#   - lets user change names, details throughout a conv
-#   - option to take in .md and update .json with it
-#       - work with key (timestamp)
-#
-#
-#
-# - SETTINGS
-#   - file
-#
-# - .sh wrapper ? :) 🡪 pipe `tee -a`
-#
-# - in prompt.py: make refresh for tokens with max allowed per model (4096)
-#
-# - make Notify Class method that accepts 
-#   arg -q (--quiet)
-#   arg -v (--verbose)
-
-
 
 
 class MyBad(Exception):
@@ -91,8 +39,6 @@ class MyBad(Exception):
         super().__init__(msg, *args, **kwargs)
         # NOTE: super() alone returns a temporary object of the superclass
         #       that then allows you to call that superclass’s methods.
-
-
 
 
 def generate(
@@ -155,8 +101,6 @@ def generate(
             raise MyBad('Probably made a mistake in model select here.')
 
 
-
-
 def run():
 
     app = QApplication(sys.argv)
@@ -192,8 +136,6 @@ def run():
         conv.save(outputs)
     else:
         print(f'Empty user prompt: no generation.')
-
-
 
 
 if __name__ == "__main__":

@@ -9,13 +9,41 @@
 
 MMI, the Model Meta-Interface, is a concept prototype for an application that acts as a universal controller for multiple LLMs.
 
-**It's very lacking, and only has `max_tokens` exposed in the GUI. Some of the code is ugly, hasn't been cleaned, etc.**
+**It's very lacking, and only has `max_tokens` exposed in the GUI.**  
+**Some of the code is ugly, hasn't been cleaned, etc.**  
+**It's a mess because I didn't have much of a plan. Just glued things together naively, quickly.**
 
 ----
 
-## Basic use
+## Requirements
 
-- Clone this repo.
+- Requires Qt (tested on Debian 12 + KDE).
+- Requires API keys for OpenAI and Anthropic.
+- I haven't built `requirements.txt`. You'll have to inspect files to see what's what (`main.py`, `prompt.py`, `history.py`, and files in `gen/`).
+- If you want to use Mixtral, it requires a manual download to be placed in `mod/Mixtral`. For instance:
+  - 🔗 [`Mixtral-8x7B-Instruct-v0.1-hf-attn-4bit-moe-2bitgs8-metaoffload-HQQ`](https://huggingface.co/mobiuslabsgmbh/Mixtral-8x7B-Instruct-v0.1-hf-attn-4bit-moe-2bitgs8-metaoffload-HQQ)
+  - I've removed the `qmodel.pt` file (22.5 GiB) but everything comes from that repo.
+  - There might be additional steps to setup HQQ, see the model's card on HF. Generally, Python will tell you what's missing.
+
+## Setup
+
+It's not exactly straightforward, there are two major steps prior to launch: add your API keys, and edit the bash script with your preferred Python path.
+
+Preparation:
+
+- Clone this repo, `cd` into it.
+- Edit `launch.sh` to set your own Python path (mine is `miniconda3`).
+- If you need Mixtral, see below.
+- Create a file named `.env` in the root folder.
+- Edit it and add your API keys for OpenAI and Anthropic:
+
+```sh
+OPENAI_API_KEY = "…"
+ANTHROPIC_API_KEY = "…"
+```
+
+Use:
+
 - Launch GUI with `launch.sh` (or alternatively `python main.py`).
 - Outputs are streamed to `stdout` (if started with `launch.sh`)
 - Conversations are saved as plain text files (see notes below). No db.
@@ -24,15 +52,9 @@ MMI, the Model Meta-Interface, is a concept prototype for an application that ac
   - The system prompt will automatically refresh.
 - To create a new conversation, type its name in the top-right text field (it takes precedence over the dropdown menu to the left). 
 
-## Usage notes
+## How it works
 
-- Requires Qt (tested on Debian 12 + KDE).
-- Requires API keys for OpenAI and Anthropic.
-  - Add them to `main.py` (should be `os.env` but oh well)
-- If you want to use Mixtral, it requires a manual download to be placed in `mod/Mixtral`. For instance:
-  - 🔗 [`Mixtral-8x7B-Instruct-v0.1-hf-attn-4bit-moe-2bitgs8-metaoffload-HQQ`](https://huggingface.co/mobiuslabsgmbh/Mixtral-8x7B-Instruct-v0.1-hf-attn-4bit-moe-2bitgs8-metaoffload-HQQ)
-  - I've removed the `qmodel.pt` file (22.5 GiB) but everything comes from that repo.
-- Lets you run linear conversations with multiple LLMs, each new message sending the whole history to keep context.
+- MMI lets you run linear conversations with multiple LLMs, each new message sending the whole history to keep context.
 - Conversations are stored in `history/context/CONVERSATION_NAME` 
   - In `conv.json`
   - as individual `.md` files, one per message.
