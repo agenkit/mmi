@@ -56,9 +56,9 @@ Use:
 ## How it works
 
 - MMI lets you run linear conversations with multiple LLMs, each new message sending the whole history to keep context.
-- Conversations are stored in `history/context/CONVERSATION_NAME` 
-  - In `conv.json`
-  - as individual `.md` files, one per message.
+- Conversations are stored in `history/context/CONVERSATION_NAME/…`
+  - `conv.json` contains the entire conversation.
+  - One individual `.md` files per message.
     - you may browse them using MKDocs or equivalent.
     - odd-numbered files are user messages; even-numbered are LLM outputs.
 - When creating a new conversation, you may select an existing one first to retrieve its system prompt, then enter a new name.
