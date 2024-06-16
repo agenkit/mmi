@@ -33,7 +33,7 @@ Preparation:
 
 - Clone this repo, `cd` into it.
 - Edit `launch.sh` to set your own Python path (mine is `miniconda3`).
-- If you need Mixtral, see below.
+- If you need Mixtral, make sure you have downloaded `mod/Mixtral/qmodel.pt` (see "Requirements" above)
 - Create a file named `.env` in the root folder.
 - Edit it and add your API keys for OpenAI and Anthropic:
 
