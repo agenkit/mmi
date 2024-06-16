@@ -2,12 +2,12 @@
 (maybe do yourself a favor and just don't 😅)  
 🡆 Use [`llm`](https://github.com/simonw/llm) by Simon Willison instead)
 
-> *Written in Dec '23 ~ Jan '24, mostly.*  
-> *Now deprecated.*
-
 # MMI: Model Meta-Interface
 
 MMI, the Model Meta-Interface, is a concept prototype for an application that acts as a universal controller for multiple LLMs.
+
+> *Written in Dec '23 ~ Jan '24, mostly.*  
+> *Now deprecated.*
 
 **It's very lacking, and only has `max_tokens` exposed in the GUI.**  
 **Some of the code is ugly, hasn't been cleaned, etc.**  
