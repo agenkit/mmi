@@ -1,5 +1,5 @@
-☢️ This is a frozen, unfinished, experimental project. Use at your own risk ☢️  
-(maybe do yourself a favor and just don't 😅)  
+☢️ **This is a frozen, unfinished, experimental project. Use at your own risk** ☢️  
+(*maybe do yourself a favor and just don't* 😅)  
 🡆 Use [`llm`](https://github.com/simonw/llm) by Simon Willison instead)
 
 # MMI: Model Meta-Interface
