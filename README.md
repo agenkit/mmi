@@ -2,9 +2,8 @@
 (maybe do yourself a favor and just don't 😅)  
 🡆 Use [`llm`](https://github.com/simonw/llm) by Simon Willison instead)
 
-> *Written in Dec '23 ~ Jan '24, mostly.*
-
-> *Deprecated, see [AMI?]() instead.*
+> *Written in Dec '23 ~ Jan '24, mostly.*  
+> *Now deprecated.*
 
 # MMI: Model Meta-Interface
 
